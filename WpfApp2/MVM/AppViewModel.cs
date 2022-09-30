@@ -31,6 +31,7 @@ namespace WpfApp2.MVM
         PublicKey _PublicKey ;
         Benalo Ben;
         Encrypt_File File_Encrypt;
+        Decrypt_file FIle_Decrypt;
 
 
         public MainViewModel()
@@ -41,6 +42,7 @@ namespace WpfApp2.MVM
             Ben = new Benalo();
             File_Encrypt = new Encrypt_File();
             _PublicKey = _Server.SendPublicKey();
+            FIle_Decrypt = new Decrypt_file();
         }
 
         private string _filePath;
@@ -70,6 +72,7 @@ namespace WpfApp2.MVM
                 }
             }
         }
+
 
         private string _fileName;
         public string FileName
@@ -169,6 +172,19 @@ namespace WpfApp2.MVM
                 FilePathSave = saveFileDialog.FileName;
             IsEnableButtonDecrypt = true;
         }
+        private ICommand _decryptMagentCommand;
 
+        public ICommand DecryptMagentCommand => _decryptMagentCommand ??= new RelayCommand(DecryptMagent);
+
+        private void DecryptMagent(object p)
+        {
+            BigInteger[] EncSym = Ben.EncryprionFunc(SymKey.AKey, _PublicKey.y, _PublicKey.r, _PublicKey.n);
+            _Server.File_Decrypt(@"C:\nikita\Numbers\JoJNEw.txt", FilePathSave, EncSym, 16);
+
+            MessageBox.Show("Complete");
+            IsEnableButtonEncrypt = false;
+            IsEnableButtonDecrypt = false;
+            IsEnableButtonSavePath = false;
+        }
     }
 }

@@ -79,7 +79,7 @@
                     <Button Style="{StaticResource RoundButton}" Content="Обзор" Grid.Column="0" Height="25"
                             Margin="0 5 5 5" Command="{Binding ChooseSavePathCommand}" IsEnabled="{Binding IsEnableButtonSavePath}"/>
                     <Button Style="{StaticResource RoundButton}" Content="Расшифровать" Grid.Column="1" Height="25"
-                            Margin="5 5 0 5" Command="{Binding DecryptBlowfishCommand}" IsEnabled="{Binding IsEnableButtonDecrypt}"/>
+                            Margin="5 5 0 5" Command="{Binding DecryptMagentCommand}" IsEnabled="{Binding IsEnableButtonDecrypt}"/>
                 </Grid>
 
 
